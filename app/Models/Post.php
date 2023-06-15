@@ -12,7 +12,10 @@ class Post extends Model
     
     use HasFactory;
     use SoftDeletes;
+<<<<<<< HEAD
  
+=======
+>>>>>>> origin/master
     
     public function getPaginateByLimit(int $limit_count = 10)
     {
@@ -24,11 +27,9 @@ class Post extends Model
         'title',
         'body',
         ];
-        
-        public function category()
-{
-    return $this->belongsTo(Category::class);
-}
-
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
 
