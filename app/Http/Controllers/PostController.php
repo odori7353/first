@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Http\Requests\PostRequest; // useする
-
+use App\Models\Category;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
     public function index(Post $post)
     {
-        return view('posts.index')->with(['posts' => $post->getPaginateBylimit(5)]);
+        return view('posts.index')->with(['posts' => $post->getPaginateBylimit()]);
     }
     
     public function show(Post $post)
@@ -19,9 +19,9 @@ class PostController extends Controller
       return view('posts.show')->with(['post' => $post]);
     }
     
-    public function create()
+    public function create(Category $category)
     {
-        return view('posts/create');
+        return view('posts.create')->with(['categories' => $category->get()]);
     }
     
     public function store(Post $post, PostRequest $request)
@@ -36,7 +36,7 @@ class PostController extends Controller
         return view('posts/edit')->with(['post' => $post]);
     }
     
-    public function update(POstRequest $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
         $input_post = $request['post'];
         $post->fill($input_post)->save();
